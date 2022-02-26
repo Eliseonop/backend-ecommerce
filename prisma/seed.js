@@ -1,5 +1,5 @@
 import Prisma from "@prisma/client";
-import adminSeed from "./seeds/admin.seed.js";
+import adminSeed from "./seeds/adminseed.js";
 
 const { PrismaClient } = Prisma;
 
@@ -15,6 +15,5 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    // siempre se ejecutara si fue correcto o incorrecto
     await prisma.$disconnect();
   });

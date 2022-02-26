@@ -12,11 +12,11 @@ datasource db {
 
 // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#model-field-scalar-types
 model Usuario {
-  id       Int    @id @unique @default(autoincrement())
+  id       Int     @id @unique @default(autoincrement())
   nombre   String
-  correo   String @unique
+  correo   String  @unique
   password String
-  imagen   String
+  imagen   String?
 
   @@map(name: "usuarios")
 }
