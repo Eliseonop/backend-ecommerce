@@ -1,6 +1,6 @@
 import { compareSync } from "bcrypt";
 import { prisma } from "../prisma.js";
-
+import jwt from "jsonwebtoken";
 export class AuthAdminService {
   static async login({ correo, password }) {
     const usuarioEncontrado = await prisma.administrador.findUnique({
