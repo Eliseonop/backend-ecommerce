@@ -15,7 +15,7 @@ export class ProductoService {
   static async obtenerProductoId(id) {
     const producto = await prisma.producto.findUnique({
       where: { id: +id },
-      include: { tipoProducto: true },
+      include: { tipoProducto: false },
       rejectOnNotFound: false,
     });
     if (producto === undefined) {
@@ -23,6 +23,8 @@ export class ProductoService {
         message: `No existe este producto con ese id`,
         id: id,
       };
+    } else {
+      return { message: "producto entcontrado", content: producto };
     }
   }
   static async listarProductos() {

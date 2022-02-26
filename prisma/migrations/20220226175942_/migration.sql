@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Genero" AS ENUM ('MASCULINO', 'FEMENINO');
+CREATE TYPE "Genero" AS ENUM ('MASCULINO', 'FEMENINO', 'OTRO');
 
 -- CreateTable
 CREATE TABLE "usuarios" (
@@ -7,7 +7,7 @@ CREATE TABLE "usuarios" (
     "nombre" TEXT NOT NULL,
     "correo" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "imagen" TEXT NOT NULL,
+    "imagen" TEXT,
 
     CONSTRAINT "usuarios_pkey" PRIMARY KEY ("id")
 );
@@ -27,9 +27,9 @@ CREATE TABLE "productos" (
     "id" SERIAL NOT NULL,
     "nombre" VARCHAR(100) NOT NULL,
     "precio" DOUBLE PRECISION NOT NULL,
-    "descripcion" VARCHAR(300) NOT NULL,
+    "descripcion" VARCHAR(300),
     "imagen" TEXT,
-    "genero" "Genero" NOT NULL,
+    "genero" "Genero" NOT NULL DEFAULT E'OTRO',
     "tipo_producto_id" INTEGER NOT NULL,
 
     CONSTRAINT "productos_pkey" PRIMARY KEY ("id")

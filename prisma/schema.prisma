@@ -36,7 +36,7 @@ model Producto {
   precio         Float
   descripcion    String?      @db.VarChar(300)
   imagen         String?
-  genero         Genero?      @default(UNISEX) @map(name: "genero")
+  genero         Genero       @default(OTRO) @map(name: "genero")
   tipoProductoId Int          @map(name: "tipo_producto_id")
   tipoProducto   TipoProducto @relation(fields: [tipoProductoId], references: [id])
 
@@ -54,5 +54,5 @@ model TipoProducto {
 enum Genero {
   MASCULINO
   FEMENINO
-  UNISEX
+  OTRO
 }

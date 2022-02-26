@@ -7,7 +7,7 @@ import { tipoProductoRouter } from "./routes/tipoProducto.routes.js";
 
 const app = express();
 
-const PORT = 3000;
+const PORT = 4000;
 // definineod rutas
 
 app.use(morgan("dev"));
@@ -18,5 +18,5 @@ app.use(tipoProductoRouter);
 app.use(authAdminRouter);
 app.use(productoRouter);
 app.listen(PORT, function () {
-  console.log("Servidor corriendo exitosamente ✔✔✔✔✔✔");
+  console.log("Servidor corriendo exitosamente ✔✔✔✔✔✔", PORT);
 });
