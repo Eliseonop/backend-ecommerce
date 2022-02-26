@@ -1,4 +1,4 @@
-import { compareSync } from "bcrypt";
+import { compareSync, hashSync } from "bcrypt";
 import { prisma } from "../prisma.js";
 
 export class AuthUserService {
@@ -26,10 +26,13 @@ export class AuthUserService {
     if (usuarioEncontrado) {
       return { message: "error al crear ya existe", pass: false };
     } else {
+      const newpassword = hashSync(password, 5);
       const usuarioNuevo = await prisma.usuario.create({
-        correo,
-        nombre,
-        password,
+        data: {
+          correo,
+          nombre,
+          password: newpassword,
+        },
       });
       return { message: "usuario creado", pass: true, content: usuarioNuevo };
     }
