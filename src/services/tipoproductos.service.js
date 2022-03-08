@@ -15,4 +15,5 @@ export class TipoProductoService {
     const listaProductos = await prisma.tipoProducto.findMany();
     return { content: listaProductos };
   }
+  //
 }
