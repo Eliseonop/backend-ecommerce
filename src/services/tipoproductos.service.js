@@ -16,4 +16,18 @@ export class TipoProductoService {
     return { content: listaProductos };
   }
   //
+  static async eliminarTipoProducto(id) {
+    const tipoProductoBuscar = await prisma.tipoProducto.findUnique({
+      where: { id },
+      rejectOnNotFound: true,
+    });
+    if (tipoProductoBuscar) {
+      const tipoProductoEliminar = await prisma.tipoProducto.delete({
+        where: { id },
+      });
+      return { tipoProducto: tipoProductoEliminar };
+    } else {
+      return { message: "no se encontro" };
+    }
+  }
 }

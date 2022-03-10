@@ -1,4 +1,5 @@
 import { tipoProductoDto } from "../dtos/request/tipoProductoDto.js";
+import { ProductoService } from "../services/producto.service.js";
 import { TipoProductoService } from "../services/tipoproductos.service.js";
 
 export async function crearTipoProducto(req, res) {
@@ -22,4 +23,9 @@ export async function listarTipoProductos(req, res) {
   const resultado = await TipoProductoService.listaTipoProducto();
 
   return res.json(resultado);
+}
+export async function eliminarTipoProducto(req, res) {
+  const { id } = req.params;
+  const resultado = await ProductoService.eliminarTipoProducto(+id);
+  return res.status(201).json(resultado);
 }
