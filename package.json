@@ -23,7 +23,7 @@
   "author": "Eliseo and group of ecommerce",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^3.9.2",
+    "@prisma/client": "^3.10.0",
     "aws-sdk": "^2.1092.0",
     "bcrypt": "^5.0.1",
     "dotenv-cli": "^5.0.0",
