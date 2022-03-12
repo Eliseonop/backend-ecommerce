@@ -8,7 +8,7 @@ import { archivoRouter } from "./routes/archivo.routes.js";
 
 const app = express();
 
-const PORT = 4000;
+const PORT = process.env.PORT ?? 4000;
 // definineod rutas
 
 app.use(morgan("dev"));
