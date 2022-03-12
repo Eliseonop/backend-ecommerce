@@ -5,14 +5,17 @@ import { authAdminRouter } from "./routes/authAdmin.routes.js";
 import { productoRouter } from "./routes/producto.routes.js";
 import { tipoProductoRouter } from "./routes/tipoProducto.routes.js";
 import { archivoRouter } from "./routes/archivo.routes.js";
-
+import cors from "cors";
 const app = express();
 
 const PORT = process.env.PORT ?? 4000;
 // definineod rutas
-
+app.use(cors());
 app.use(morgan("dev"));
 app.use(json());
+app.get("/", (req, res) => {
+  res.send("hola!");
+});
 
 app.use(authRouter);
 app.use(tipoProductoRouter);
