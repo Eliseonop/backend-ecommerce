@@ -28,3 +28,9 @@ export async function eliminarProducto(req, res) {
   const resultado = await ProductoService.eliminarProductoId(+id);
   return res.status(201).json(resultado);
 }
+
+// export async function devolver(req, res) {
+//   const { id } = req.params;
+//   const resultado = await ProductoService.devolverProducto(id);
+//   return res.json(resultado);
+// }

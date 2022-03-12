@@ -1,4 +1,5 @@
 import { prisma } from "../prisma.js";
+import { ArchivoService } from "./archivos.service.js";
 
 export class ProductoService {
   static async crearProducto(data) {
@@ -15,17 +16,25 @@ export class ProductoService {
   static async obtenerProductoId(id) {
     const producto = await prisma.producto.findUnique({
       where: { id: +id },
-      include: { tipoProducto: false },
+      include: { tipoProducto: true },
       rejectOnNotFound: false,
     });
+
     if (producto === undefined) {
       return {
         message: `No existe este producto con ese id`,
         id: id,
       };
-    } else {
-      return { message: "producto entcontrado", content: producto };
     }
+
+    const productoConImagen = {
+      ...producto,
+      imagen: ArchivoService.devolverURL(producto.imagen),
+    };
+
+    return {
+      producto: productoConImagen,
+    };
   }
   static async listarProductos() {
     const productos = await prisma.producto.findMany({
@@ -34,18 +43,24 @@ export class ProductoService {
     const productosIterados = productos.map((producto) => {
       return {
         ...producto,
+        imagen: producto.imagen && ArchivoService.devolverURL(producto.imagen),
       };
     });
     return {
-      message: "Productos",
-      data: productosIterados,
+      productos: productosIterados,
     };
   }
   static async eliminarProductoId(id) {
     const productoEncontrado = await prisma.producto.findUnique({
       where: { id },
       rejectOnNotFound: true,
+      select: { imagen: true },
     });
+
+    if (productoEncontrado.imagen) {
+      ArchivoService.eliminarArchivo(productoEncontrado.imagen);
+    }
+
     if (productoEncontrado) {
       const productoEliminado = await prisma.producto.delete({
         where: { id },
@@ -55,4 +70,21 @@ export class ProductoService {
       return { message: "no se encontro" };
     }
   }
+
+  // static async devolverProducto(id) {
+  //   const producto = await prisma.producto.findUnique({
+  //     where: { id },
+  //     rejectOnNotFound: false,
+  //   });
+
+  //   if (productoEncontrado === undefined) {
+  //     return {
+  //       message: `No existe el producto con el id ${id}`,
+  //     };
+  //   }
+
+  //   return {
+  //     producto,
+  //   };
+  // }
 }
