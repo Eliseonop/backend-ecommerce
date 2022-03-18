@@ -10,9 +10,10 @@ const app = express();
 
 const PORT = 4000;
 // definineod rutas
-app.use(cors());
+
 app.use(morgan("dev"));
 app.use(json());
+app.use(cors());
 app.get("/", (req, res) => {
   res.send("hola!");
 });

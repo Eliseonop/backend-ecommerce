@@ -12,3 +12,12 @@ export async function crearArchivo(req, res) {
     });
   }
 }
+
+export async function eliminarArchivo(req, res) {
+  try {
+    await ArchivoService.eliminarArchivo(req.body);
+    return res.status(201).json(url);
+  } catch (error) {
+    return res.status(401).json(error);
+  }
+}

@@ -48,12 +48,10 @@ export class ArchivoService {
       { Bucket: process.env.AWS_BUCKET, Key: path },
       (error, data) => {
         if (error) {
-          console.log("El error es");
-          console.log(error);
+          return { message: "error", error };
         }
         if (data) {
-          console.log("la data es");
-          console.log(data);
+          return { message: "la data eliminada es", data };
         }
       }
     );
